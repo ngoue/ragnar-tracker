@@ -4,9 +4,9 @@ import React from 'react'
 function Log({runner, distance, elevation}) {
   return (
     <div className='runner-log'>
-      <p>{runner}</p>
-      <p>{distance} mi.</p>
-      <p>{elevation} ft.</p>
+      <p className='name'>{runner}</p>
+      <p className='distance'>{distance} <span>mi</span></p>
+      <p className='elevation'>{elevation} <span>ft</span></p>
     </div>
   )
 }

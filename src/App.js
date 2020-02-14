@@ -1,7 +1,6 @@
 import API, { graphqlOperation } from '@aws-amplify/api'
 import moment from 'moment'
 import React from 'react'
-import './App.scss'
 import awsconfig from './aws-exports'
 import * as queries from './graphql/queries'
 import Log from './Log'
@@ -52,12 +51,14 @@ function App() {
           {hoursLeft} <span>hours</span>
         </div>
         <div className='minutes'>
-         {minutesLeft} <span>minutes</span>
+          {minutesLeft} <span>minutes</span>
         </div>
         <div className='seconds'>
           {secondsLeft} <span>seconds</span>
         </div>
       </div>
+      <hr />
+      <h2 className='header'>Training Results</h2>
       <div className='runner-logs'>
         {logs.length > 0 ? (
           logs.map(log => <Log key={log.id} {...log} />)
