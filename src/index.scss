@@ -98,6 +98,7 @@ hr {
 }
 
 .runner-logs {
+  text-align: center;
   margin: 20px 0px;
 
   .runner-log {
@@ -106,10 +107,33 @@ hr {
     margin: 5px auto;
     padding: 10px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+
+    .details {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      form {
+        width: 100%;
+      }
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+    }
 
     &:last-child {
       border-bottom: none;
+    }
+
+    &.form {
+      input {
+        width: 30%;
+        max-width: 180px;
+        margin: 1%;
+      }
     }
 
     .name,
@@ -118,7 +142,7 @@ hr {
       font-size: 2vw;
       font-weight: 900;
 
-      @media screen and (max-width: 720px) {
+      @media screen and (max-width: 900px) {
         & {
           font-size: 18px;
         }
@@ -169,5 +193,42 @@ hr {
 
   100% {
     transform: rotate(360deg);
+  }
+}
+
+.btn-link {
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.5vw;
+  margin: 5px;
+  color: $neon-pink;
+
+  @media screen and (max-width: 1000px) {
+    & {
+      font-size: 18px;
+    }
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: underline;
+    color: $neon-purple;
+  }
+}
+
+input {
+  box-sizing: border-box;
+  text-align: center;
+  border: none;
+  border-radius: 0px;
+  padding: 5px;
+  font-weight: 900;
+
+  &::placeholder {
+    font-size: 0.75em;
   }
 }

@@ -7,6 +7,7 @@ export const createLog = `mutation CreateLog($input: CreateLogInput!) {
     runner
     distance
     elevation
+    sortKey
   }
 }
 `;
@@ -16,6 +17,7 @@ export const updateLog = `mutation UpdateLog($input: UpdateLogInput!) {
     runner
     distance
     elevation
+    sortKey
   }
 }
 `;
@@ -25,6 +27,7 @@ export const deleteLog = `mutation DeleteLog($input: DeleteLogInput!) {
     runner
     distance
     elevation
+    sortKey
   }
 }
 `;

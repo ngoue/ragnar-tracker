@@ -7,6 +7,7 @@ export const getLog = `query GetLog($id: ID!) {
     runner
     distance
     elevation
+    sortKey
   }
 }
 `;
@@ -17,6 +18,7 @@ export const listLogs = `query ListLogs($filter: ModelLogFilterInput, $limit: In
       runner
       distance
       elevation
+      sortKey
     }
     nextToken
   }

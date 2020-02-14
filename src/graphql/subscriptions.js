@@ -7,6 +7,7 @@ export const onCreateLog = `subscription OnCreateLog {
     runner
     distance
     elevation
+    sortKey
   }
 }
 `;
@@ -16,6 +17,7 @@ export const onUpdateLog = `subscription OnUpdateLog {
     runner
     distance
     elevation
+    sortKey
   }
 }
 `;
@@ -25,6 +27,7 @@ export const onDeleteLog = `subscription OnDeleteLog {
     runner
     distance
     elevation
+    sortKey
   }
 }
 `;
