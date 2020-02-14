@@ -197,11 +197,13 @@ hr {
 }
 
 .btn-link {
+  background-color: transparent;
   border: none;
   cursor: pointer;
   text-decoration: none;
   text-transform: uppercase;
-  font-weight: bold;
+  font-family: inherit;
+  font-weight: 900;
   font-size: 1.5vw;
   margin: 5px;
   color: $neon-pink;
@@ -226,6 +228,7 @@ input {
   border: none;
   border-radius: 0px;
   padding: 5px;
+  font-family: inherit;
   font-weight: 900;
 
   &::placeholder {
