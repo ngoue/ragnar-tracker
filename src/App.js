@@ -4,6 +4,7 @@ import React from 'react'
 import awsconfig from './aws-exports'
 import * as queries from './graphql/queries'
 import Log from './Log'
+import LoadingSpinner from './LoadingSpinner'
 
 // Setup aws-amplify
 API.configure(awsconfig)
@@ -12,6 +13,7 @@ API.configure(awsconfig)
 const RagnarStartTime = moment([2020, 6, 12])
 
 function App() {
+  const [loading, setLoading] = React.useState(true)
   const [logs, setLogs] = React.useState([])
   const [now, setNow] = React.useState(moment())
 
@@ -20,6 +22,7 @@ function App() {
       console.log('loading logs')
       const resp = await API.graphql(graphqlOperation(queries.listLogs))
       setLogs(resp.data.listLogs.items)
+      setLoading(false)
     }
 
     load()
@@ -60,7 +63,9 @@ function App() {
       <hr />
       <h2 className='header'>Training Results</h2>
       <div className='runner-logs'>
-        {logs.length > 0 ? (
+        {loading ? (
+          <LoadingSpinner />
+        ) : logs.length > 0 ? (
           logs.map(log => <Log key={log.id} {...log} />)
         ) : (
           <p>No logs</p>

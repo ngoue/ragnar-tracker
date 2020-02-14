@@ -132,3 +132,42 @@ hr {
     }
   }
 }
+
+.loading-spinner-container {
+  margin: 100px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media screen and (max-width: 720px) {
+    & {
+      margin: 50px 10px;
+    }
+  }
+
+  .loading-spinner {
+    height: 50px;
+    width: 50px;
+    border: 15px solid black;
+    border-radius: 50px;
+    border-bottom-color: transparent;
+    animation: spin 1s infinite linear;
+
+    @media screen and (max-width: 720px) {
+      height: 20px;
+      width: 20px;
+      border-width: 5px;
+      border-radius: 20px;
+    }
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
