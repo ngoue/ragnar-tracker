@@ -52,6 +52,7 @@ function LogForm(props) {
             onChange={handleChange}
             value={logDetails.distance}
             placeholder='Distance'
+            type='number'
           />
           <input
             name='elevation'
@@ -59,6 +60,7 @@ function LogForm(props) {
             onChange={handleChange}
             value={logDetails.eleveation}
             placeholder='Elevation'
+            type='number'
           />
         </form>
       </div>

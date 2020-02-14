@@ -1,16 +1,19 @@
 import API, { graphqlOperation } from '@aws-amplify/api'
+import PubSub from '@aws-amplify/pubsub'
 import _ from 'lodash'
 import moment from 'moment'
 import React from 'react'
 import awsconfig from './aws-exports'
 import * as mutations from './graphql/mutations'
 import * as queries from './graphql/queries'
+import * as subscriptions from './graphql/subscriptions'
 import LoadingSpinner from './LoadingSpinner'
 import Log from './Log'
 import LogForm from './LogForm'
 
 // Setup aws-amplify
 API.configure(awsconfig)
+PubSub.configure(awsconfig)
 
 // Ragnar start day
 const RagnarStartTime = moment([2020, 6, 12])
@@ -29,8 +32,23 @@ function App() {
       setLoading(false)
     }
 
-    load()
-  }, [])
+    const createSub = API.graphql(graphqlOperation(subscriptions.onCreateLog)).subscribe({
+      next: (resp) => {
+        setLogs([
+          resp.value.data.onCreateLog,
+          ...logs,
+        ])
+      },
+    })
+
+    if (loading) {
+      load()
+    }
+
+    return () => {
+      createSub.unsubscribe()
+    }
+  }, [loading, logs])
 
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -49,7 +67,7 @@ function App() {
 
   const createLog = async logDetails => {
     try {
-      const resp = await API.graphql(
+      await API.graphql(
         graphqlOperation(mutations.createLog, {
           input: {
             ...logDetails,
