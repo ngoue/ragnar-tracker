@@ -1,24 +1,32 @@
+import API, { graphqlOperation } from '@aws-amplify/api';
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import awsconfig from './aws-exports';
+import * as queries from './graphql/queries';
+import Log from './Log';
+
+API.configure(awsconfig)
 
 function App() {
+  const [logs, setLogs] = React.useState([])
+
+  React.useEffect(() => {
+    const load = async () => {
+      console.log('loading logs')
+      const resp = await API.graphql(graphqlOperation(queries.listLogs))
+      setLogs(resp.data.listLogs.items)
+    }
+
+    load()
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {logs.length > 0 ? logs.map(log => (
+        <Log key={log.id} {...log} />
+      )) : (
+        <p>No logs</p>
+      )}
     </div>
   );
 }
