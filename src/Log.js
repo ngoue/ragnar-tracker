@@ -3,7 +3,7 @@ import React from 'react'
 
 function Log({runner, distance, elevation}) {
   return (
-    <div>
+    <div className='runner-log'>
       <p>{runner}</p>
       <p>{distance} mi.</p>
       <p>{elevation} ft.</p>
