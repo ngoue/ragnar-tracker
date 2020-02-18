@@ -4,6 +4,7 @@ import _ from 'lodash'
 import moment from 'moment'
 import React from 'react'
 import awsconfig from './aws-exports'
+import Countdown from './Countdown'
 import * as mutations from './graphql/mutations'
 import * as queries from './graphql/queries'
 import * as subscriptions from './graphql/subscriptions'
@@ -15,29 +16,28 @@ import LogForm from './LogForm'
 API.configure(awsconfig)
 PubSub.configure(awsconfig)
 
-// Ragnar start day
-const RagnarStartTime = moment([2020, 6, 12])
-
 function App() {
   const [loading, setLoading] = React.useState(true)
   const [adding, setAdding] = React.useState(false)
   const [logs, setLogs] = React.useState([])
-  const [now, setNow] = React.useState(moment())
 
   React.useEffect(() => {
     const load = async () => {
       const resp = await API.graphql(graphqlOperation(queries.listLogs))
-      const orderedLogs = _.orderBy(resp.data.listLogs.items, ['sortKey', 'runner', 'distance'], ['desc', 'asc', 'asc'])
+      const orderedLogs = _.orderBy(
+        resp.data.listLogs.items,
+        ['sortKey', 'runner', 'distance'],
+        ['desc', 'asc', 'asc']
+      )
       setLogs(orderedLogs)
       setLoading(false)
     }
 
-    const createSub = API.graphql(graphqlOperation(subscriptions.onCreateLog)).subscribe({
-      next: (resp) => {
-        setLogs([
-          resp.value.data.onCreateLog,
-          ...logs,
-        ])
+    const createSub = API.graphql(
+      graphqlOperation(subscriptions.onCreateLog)
+    ).subscribe({
+      next: resp => {
+        setLogs([resp.value.data.onCreateLog, ...logs])
       },
     })
 
@@ -49,16 +49,6 @@ function App() {
       createSub.unsubscribe()
     }
   }, [loading, logs])
-
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      setNow(moment())
-    }, 1000)
-
-    return () => {
-      clearInterval(interval)
-    }
-  })
 
   const addLog = event => {
     event.preventDefault()
@@ -87,28 +77,10 @@ function App() {
     setAdding(false)
   }
 
-  const secondsLeft = Math.abs(now.diff(RagnarStartTime, 'seconds')) % 60
-  const minutesLeft = Math.abs(now.diff(RagnarStartTime, 'minutes')) % 60
-  const hoursLeft = Math.abs(now.diff(RagnarStartTime, 'hours')) % 24
-  const daysLeft = Math.abs(now.diff(RagnarStartTime, 'days'))
-
   return (
     <div className='App'>
       <h1 className='header'>Ragnar 2020</h1>
-      <div className='countdown'>
-        <div className='days'>
-          {daysLeft} <span>days</span>
-        </div>
-        <div className='hours'>
-          {hoursLeft} <span>hours</span>
-        </div>
-        <div className='minutes'>
-          {minutesLeft} <span>minutes</span>
-        </div>
-        <div className='seconds'>
-          {secondsLeft} <span>seconds</span>
-        </div>
-      </div>
+      <Countdown />
       <hr />
       <h2 className='header'>Training Results</h2>
       {loading ? (
@@ -123,9 +95,7 @@ function App() {
             </button>
           )}
           {logs.length > 0
-            ? logs.map(log => (
-                <Log key={log.id} {...log} />
-              ))
+            ? logs.map(log => <Log key={log.id} {...log} />)
             : null}
         </div>
       )}
