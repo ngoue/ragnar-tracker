@@ -9,8 +9,7 @@ import * as mutations from './graphql/mutations'
 import * as queries from './graphql/queries'
 import * as subscriptions from './graphql/subscriptions'
 import LoadingSpinner from './LoadingSpinner'
-import Log from './Log'
-import LogForm from './LogForm'
+import RunnerLogs from './RunnerLogs'
 
 // Setup aws-amplify
 API.configure(awsconfig)
@@ -18,7 +17,6 @@ PubSub.configure(awsconfig)
 
 function App() {
   const [loading, setLoading] = React.useState(true)
-  const [adding, setAdding] = React.useState(false)
   const [logs, setLogs] = React.useState([])
 
   React.useEffect(() => {
@@ -50,11 +48,6 @@ function App() {
     }
   }, [loading, logs])
 
-  const addLog = event => {
-    event.preventDefault()
-    setAdding(true)
-  }
-
   const createLog = async logDetails => {
     try {
       await API.graphql(
@@ -65,16 +58,11 @@ function App() {
           },
         })
       )
-      setAdding(false)
     } catch (err) {
       console.error('Unable to create log')
       console.error(err)
       // throw err
     }
-  }
-
-  const cancelAdd = () => {
-    setAdding(false)
   }
 
   return (
@@ -86,18 +74,7 @@ function App() {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <div className='runner-logs'>
-          {adding ? (
-            <LogForm onCancel={cancelAdd} onSubmit={createLog} />
-          ) : (
-            <button className='btn-link' onClick={addLog}>
-              Add Entry
-            </button>
-          )}
-          {logs.length > 0
-            ? logs.map(log => <Log key={log.id} {...log} />)
-            : null}
-        </div>
+        <RunnerLogs onCreateLog={createLog} logs={logs} />
       )}
     </div>
   )
