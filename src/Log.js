@@ -3,17 +3,15 @@ import React from 'react'
 
 function Log({ runner, distance, elevation }) {
   return (
-    <div className='runner-log'>
-      <div className='details'>
-        <p className='name'>{runner}</p>
-        <p className='distance'>
-          {distance} <span>mi</span>
-        </p>
-        <p className='elevation'>
-          {elevation} <span>ft</span>
-        </p>
-      </div>
-    </div>
+    <tr className='runner-log'>
+      <td className='name'>{runner}</td>
+      <td className='distance'>
+        {distance} <span>mi</span>
+      </td>
+      <td className='elevation'>
+        {elevation} <span>ft</span>
+      </td>
+    </tr>
   )
 }
 

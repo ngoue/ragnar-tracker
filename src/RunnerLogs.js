@@ -25,15 +25,30 @@ function RunnerLogs({ logs, onCreateLog }) {
   }
 
   return (
-    <div className='runner-logs'>
-      {adding ? (
-        <LogForm onCancel={cancelAdd} onSubmit={submit} />
-      ) : (
-        <button className='btn-link' onClick={addLog}>
-          Add Entry
-        </button>
-      )}
-      {logs.length > 0 ? logs.map(log => <Log key={log.id} {...log} />) : null}
+    <div className='runner-logs-container'>
+      <div className='runner-logs'>
+        {adding ? (
+          <LogForm onCancel={cancelAdd} onSubmit={submit} />
+        ) : (
+          <button className='btn-link' onClick={addLog}>
+            Add Entry
+          </button>
+        )}
+        <table cellSpacing='0'>
+          <thead>
+            <tr>
+              <th className='header'>NAME</th>
+              <th className='header'>DISTANCE</th>
+              <th className='header'>ELEVATION</th>
+            </tr>
+          </thead>
+          <tbody>
+            {logs.length > 0
+              ? logs.map(log => <Log key={log.id} {...log} />)
+              : null}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }

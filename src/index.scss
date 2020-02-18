@@ -29,7 +29,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+th {
   &.header {
     @include light-text;
     font-weight: 900;
@@ -82,76 +83,96 @@ hr {
       color: black;
     }
   }
-
-  // .days {
-  //   color: $neon-red;
-  // }
-  // .hours {
-  //   color: $neon-blue;
-  // }
-  // .minutes {
-  //   color: $neon-green;
-  // }
-  // .seconds {
-  //   color: $neon-pink;
-  // }
 }
 
-.runner-logs {
+.runner-logs-container {
   text-align: center;
   margin: 20px 0px;
 
-  .runner-log {
-    max-width: 600px;
-    border-bottom: 2px solid #0d0d0d;
-    margin: 5px auto;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
+  .runner-logs {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
 
-    .details {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
+    table {
+      width: 100%;
+      max-width: 800px;
+      margin: 40px auto;
 
-      form {
-        width: 100%;
-      }
-    }
+      th,
+      td {
+        text-align: right;
 
-    .actions {
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    &:last-child {
-      border-bottom: none;
-    }
-
-    &.form {
-      input {
-        width: 30%;
-        max-width: 180px;
-        margin: 1%;
-      }
-    }
-
-    .name,
-    .distance,
-    .elevation {
-      font-size: 2vw;
-      font-weight: 900;
-
-      @media screen and (max-width: 900px) {
-        & {
-          font-size: 18px;
+        &:first-child {
+          text-align: left;
         }
       }
 
-      span {
-        @include light-text;
-        font-weight: 500;
-        font-size: 0.75em;
+      th {
+        font-style: italic;
+        padding: 5px;
+      }
+    }
+
+    .runner-log {
+      border-bottom: 2px solid #0d0d0d;
+      margin: 5px auto;
+      padding: 10px;
+
+      td {
+        border-bottom: 2px solid #0d0d0d;
+        padding: 30px 5px;
+      }
+
+      &:last-child td {
+        border-bottom: none;
+      }
+
+      &.form {
+        border-bottom: none;
+
+        form {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          width: 100%;
+        }
+      }
+
+      .actions {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &.form {
+        input {
+          width: 30%;
+          max-width: 180px;
+          margin: 1%;
+        }
+      }
+
+      .name,
+      .distance,
+      .elevation {
+        font-size: 2vw;
+        font-weight: 900;
+
+        @media screen and (max-width: 900px) {
+          & {
+            font-size: 18px;
+          }
+        }
+
+        span {
+          @include light-text;
+          font-weight: 500;
+          font-size: 0.75em;
+        }
       }
     }
   }

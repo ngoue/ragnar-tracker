@@ -27,7 +27,7 @@ function LogForm(props) {
     setSubmitting(true)
     try {
       props.onSubmit(logDetails)
-    } catch(err) {
+    } catch (err) {
       // no-op
     } finally {
       setSubmitting(false)
@@ -36,34 +36,32 @@ function LogForm(props) {
 
   return (
     <div className='runner-log form'>
-      <div className='details'>
-        <form autoComplete='off'>
-          <input
-            name='runner'
-            className='name'
-            onChange={handleChange}
-            value={logDetails.runner}
-            placeholder='Name'
-            autoFocus
-          />
-          <input
-            name='distance'
-            className='distance'
-            onChange={handleChange}
-            value={logDetails.distance}
-            placeholder='Distance'
-            type='number'
-          />
-          <input
-            name='elevation'
-            className='elevation'
-            onChange={handleChange}
-            value={logDetails.eleveation}
-            placeholder='Elevation'
-            type='number'
-          />
-        </form>
-      </div>
+      <form autoComplete='off'>
+        <input
+          name='runner'
+          className='name'
+          onChange={handleChange}
+          value={logDetails.runner}
+          placeholder='Name'
+          autoFocus
+        />
+        <input
+          name='distance'
+          className='distance'
+          onChange={handleChange}
+          value={logDetails.distance}
+          placeholder='Distance'
+          type='number'
+        />
+        <input
+          name='elevation'
+          className='elevation'
+          onChange={handleChange}
+          value={logDetails.eleveation}
+          placeholder='Elevation'
+          type='number'
+        />
+      </form>
       <div className='actions'>
         <button className='btn-link' onClick={cancel} disabled={submitting}>
           Cancel
