@@ -8,7 +8,7 @@ function Countdown() {
   React.useEffect(() => {
     const interval = setInterval(() => {
       setNow(moment())
-    }, 1000)
+    }, 50)
 
     return () => clearInterval(interval)
   })

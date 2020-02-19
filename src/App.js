@@ -21,9 +21,23 @@ function App() {
 
   React.useEffect(() => {
     const load = async () => {
-      const resp = await API.graphql(graphqlOperation(queries.listLogs))
+      let allLogs = []
+      let resp = await API.graphql(
+        graphqlOperation(queries.listLogs, { limit: 50 })
+      )
+      allLogs = allLogs.concat(resp.data.listLogs.items)
+
+      // get paginated results
+      while (!!resp.data.listLogs.nextToken) {
+        const nextToken = resp.data.listLogs.nextToken
+        resp = await API.graphql(
+          graphqlOperation(queries.listLogs, { nextToken })
+        )
+        allLogs = allLogs.concat(resp.data.listLogs.items)
+      }
+
       const orderedLogs = _.orderBy(
-        resp.data.listLogs.items,
+        allLogs,
         ['sortKey', 'runner', 'distance'],
         ['desc', 'asc', 'asc']
       )

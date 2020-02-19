@@ -6,8 +6,7 @@ import Totals from './Totals'
 function TrainingResults({ logs, onCreateLog }) {
   const [showTotals, setShowTotals] = React.useState(true)
 
-  const toggle = (event) => {
-    // event.target.blur()
+  const toggle = event => {
     setShowTotals(!showTotals)
   }
 
