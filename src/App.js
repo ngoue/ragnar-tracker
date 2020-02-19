@@ -41,8 +41,8 @@ function App() {
         ['sortKey', 'runner', 'distance'],
         ['desc', 'asc', 'asc']
       )
-      setLogs(orderedLogs)
       setLoading(false)
+      setLogs(orderedLogs)
     }
 
     const createSub = API.graphql(
