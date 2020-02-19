@@ -34,6 +34,9 @@ function LogForm(props) {
     }
   }
 
+  const isValid = () =>
+    !!logDetails.runner && !!logDetails.distance && !!logDetails.elevation
+
   return (
     <div className='runner-log form'>
       <form autoComplete='off'>
@@ -66,7 +69,11 @@ function LogForm(props) {
         <button className='btn-link' onClick={cancel} disabled={submitting}>
           Cancel
         </button>
-        <button className='btn-link' onClick={submit} disabled={submitting}>
+        <button
+          className='btn-link'
+          onClick={submit}
+          disabled={submitting || !isValid()}
+        >
           Save
         </button>
       </div>

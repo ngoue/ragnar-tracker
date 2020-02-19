@@ -60,7 +60,8 @@ hr {
   }
 }
 
-.countdown {
+.countdown,
+.totals {
   display: flex;
   justify-content: space-around;
   margin: 20px 10px;
@@ -68,7 +69,10 @@ hr {
   .days,
   .hours,
   .minutes,
-  .seconds {
+  .seconds,
+  .runners,
+  .distance,
+  .elevation {
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -81,6 +85,30 @@ hr {
       font-size: 0.3em;
       font-weight: 600;
       color: black;
+    }
+  }
+}
+
+.training-results {
+  margin-bottom: 100px;
+  .tabs {
+    display: flex;
+    justify-content: space-evenly;
+    max-width: 800px;
+    width: 100%;
+    margin: 0px auto 40px;
+    border: 2px solid black;
+    border-left: none;
+    border-right: none;
+
+    button.btn-link {
+      padding: 20px;
+
+      &:disabled {
+        cursor: text;
+        color: black;
+        opacity: 1;
+      }
     }
   }
 }
@@ -238,8 +266,17 @@ hr {
   &:hover,
   &:active,
   &:focus {
-    text-decoration: underline;
     color: $neon-purple;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $neon-pink;
+    }
   }
 }
 

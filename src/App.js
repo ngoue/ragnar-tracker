@@ -9,7 +9,7 @@ import * as mutations from './graphql/mutations'
 import * as queries from './graphql/queries'
 import * as subscriptions from './graphql/subscriptions'
 import LoadingSpinner from './LoadingSpinner'
-import RunnerLogs from './RunnerLogs'
+import TrainingResults from './TrainingResults'
 
 // Setup aws-amplify
 API.configure(awsconfig)
@@ -74,7 +74,7 @@ function App() {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <RunnerLogs onCreateLog={createLog} logs={logs} />
+        <TrainingResults logs={logs} onCreateLog={createLog} />
       )}
     </div>
   )
