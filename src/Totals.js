@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 const RealRunners = [
+  'abigail',
   'amy',
   'andi',
   'aspen',
@@ -9,6 +10,7 @@ const RealRunners = [
   'danny',
   'hunter',
   'jordan',
+  'keana',
   'kjanela',
   'nick',
   'toshi',
