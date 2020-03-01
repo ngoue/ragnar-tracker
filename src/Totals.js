@@ -13,6 +13,7 @@ const RealRunners = [
   'keana',
   'kjanela',
   'nick',
+  'sam m',
   'toshi',
   'trevor',
 ]
