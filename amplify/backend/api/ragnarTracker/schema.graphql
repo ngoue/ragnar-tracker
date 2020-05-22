@@ -1,7 +1,0 @@
-type Log @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  runner: String!
-  distance: Float!
-  elevation: Float!
-  sortKey: Int!
-}
